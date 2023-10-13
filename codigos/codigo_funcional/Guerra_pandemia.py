@@ -27,7 +27,7 @@ class State(enum.Enum):
     sick = 1
     dead = 2
     immune = 3
-    guerra = 4
+    war = 4
 
 class Individual:
     def __init__(self, state):
@@ -40,12 +40,12 @@ class RandomWalkModel:
         self.currentGeneration = 0
 
         # Tabela de probabilidades de transição:
-        #       healthy sick    dead   immune  guerra
+        #       healthy sick    dead   immune  war
         # healthy 0.7    0.0     0.0    0.0     0.3
         # sick    0.1    0.2     0.1    0.2     0.4
         # dead    0.0    0.0     0.0    0.0     0.0
         # immune  0.1    0.0     0.0    0.0     0.3
-        # guerra  0.0    0.0     0.0    0.0     0.0
+        # war     0.0    0.0     0.0    0.0     0.0
         #
         # Observe que não há transição do estado "healthy"
         self.transitionProbabilities = [
@@ -180,10 +180,55 @@ class RandomWalkModel:
             for individual in line:
                 if individual.state == State.dead :
                     deaths += 1
-                elif individual.state == State.guerra:
+                elif individual.state == State.war:
                     deaths += 1
 
         return deaths
+    
+    def numberOfDead(self):
+        deads = 0
+
+        for line in self.population:
+            for individual in line:
+                if individual.state == State.dead :
+                    deads += 1
+        return deads
+    
+    def numberOfWar(self):
+        wars = 0
+
+        for line in self.population:
+            for individual in line:
+                if individual.state == State.war :
+                    wars += 1
+        return wars
+    
+    def numberOfHealthy(self):
+        healthys = 0
+
+        for line in self.population:
+            for individual in line:
+                if individual.state == State.healthy :
+                    healthys += 1
+        return healthys
+    
+    def numberOfSick(self):
+        sicks = 0
+
+        for line in self.population:
+            for individual in line:
+                if individual.state == State.sick :
+                    sicks += 1
+        return sicks
+    
+    def numberOfImmune(self):
+        immunes = 0
+
+        for line in self.population:
+            for individual in line:
+                if individual.state == State.immune :
+                    immunes += 1
+        return immunes
 
     def logPopulation(self, population):
         for i in range(len(population)):
@@ -207,18 +252,18 @@ class RandomWalkModel:
                     img.putpixel((i, j), (256, 0, 0))
                 elif self.population[i][j].state == State.immune:
                     img.putpixel((i, j), (0, 0, 256))
-                elif self.population[i][j].state == State.guerra:
+                elif self.population[i][j].state == State.war:
                     img.putpixel((i, j), (0, 0, 0))
                 else:
                     print("ESTADO INVÁLIDO")
 
         img.save("gen" + str(name) + ".png")
 
-numberOfRuns = 1000
+numberOfRuns = 100
 gridSize = 100
 numberOfGenerations = 52  # número de semanas em um ano
 
 for i in range(0, numberOfRuns):
     model = RandomWalkModel(gridSize)
     model.simulation(numberOfGenerations, False)
-    print(model.numberOfDeaths())
+    print(model.numberOfHealthy(), model.numberOfSick(), model.numberOfDead(), model.numberOfImmune(), model.numberOfWar())
