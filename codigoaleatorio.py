@@ -220,7 +220,7 @@ class RandomWalkModel:
 		    	else:
 		    		print("INVALID STATE")
 
-		img.save("gen" + str(name) + ".png")
+		img.save("gen1" + str(name) + ".png")
 		#img.show()
 
 numberOfRuns = 1000

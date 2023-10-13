@@ -208,7 +208,7 @@ class RandomWalkModel:
                 elif self.population[i][j].state == State.immune:
                     img.putpixel((i, j), (0, 0, 256))
                 elif self.population[i][j].state == State.guerra:
-                    img.putpixel((i, j), (233, 111, 256))
+                    img.putpixel((i, j), (0, 0, 0))
                 else:
                     print("ESTADO INVÁLIDO")
 
