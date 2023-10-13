@@ -41,19 +41,19 @@ class RandomWalkModel:
 
         # Tabela de probabilidades de transição:
         #       healthy sick    dead   immune  guerra
-        # healthy 0.5    0.0     0.0    0.0     0.5
+        # healthy 0.7    0.0     0.0    0.0     0.3
         # sick    0.1    0.2     0.1    0.2     0.4
         # dead    0.0    0.0     0.0    0.0     0.0
-        # immune  0.1    0.0     0.0    0.0     0.5
+        # immune  0.1    0.0     0.0    0.0     0.3
         # guerra  0.0    0.0     0.0    0.0     0.0
         #
         # Observe que não há transição do estado "healthy"
         self.transitionProbabilities = [
-            [1.0, 0.0, 0.0, 0.1, 0.5],
-            [0.1, 0.2, 0.1, 0.2, 0.4],
-            [0.0, 0.0, 0.0, 0.0, 0.0],
-            [0.1, 0.0, 0.0, 0.0, 0.5],
-            [0.0, 0.0, 0.0, 0.0, 0.0]
+                [0.7, 0.0, 0.0, 0.0, 0.3],
+                [0.1, 0.2, 0.1, 0.2, 0.4],
+                [0.0, 0.0, 0.0, 0.0, 0.0],
+                [0.1, 0.0, 0.0, 0.0, 0.3],
+                [0.0, 0.0, 0.0, 0.0, 0.0]
         ]
         self.contagionFactor = 0.5
 
